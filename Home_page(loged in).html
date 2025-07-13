@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <style>
+        html, body {
+            height: 100%;
+        }
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #f8fafc 0%, #f0faff 100%);
+        }
+         .navbar {
+            background: #0074D9;
+            display: flex;
+            align-items: center;
+            padding: 0 24px;
+            justify-content: space-between;
+            box-shadow: 0 2px 12px rgba(0,116,217,0.08);
+            height: 65px;
+            min-height: 65px;
+            z-index: 10;
+        }
+        .navbar-img {
+            height: 52px;
+            margin-left: 0;
+            margin-right: 18px;
+            transition: height 0.2s;
+        }
+        .navbar-right {
+            display: flex;
+            align-items: center;
+            margin-left: auto;
+        }
+        .navbar a, .dropbtn {
+            font-size: 1.25rem;
+            color: white;
+            text-align: center;
+            padding: 16px 22px;
+            text-decoration: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-weight: 700;
+            letter-spacing: 0.7px;
+            transition: font-size 0.2s, padding 0.2s;
+        }
+        .navbar a:hover, .dropdown:hover .dropbtn {
+            background: #00c3ff;
+            color: #fff;
+        }
+        .dropdown {
+            position: relative;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            left: 0;
+        }
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+        }
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        .banner {
+            background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            padding: 160px 20px 100px 20px;
+            text-align: center;
+            color: #fff;
+            border-radius: 0;
+            box-shadow: 0 8px 32px rgba(0,116,217,0.10);
+            position: relative;
+            overflow: hidden;
+            z-index: 0;
+        }
+        .banner-overlay {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.35);
+            z-index: 1;
+        }
+        .banner-content {
+            position: relative;
+            z-index: 2;
+            padding-bottom: 48px;
+        }
+        .banner-title {
+            font-size: clamp(2rem, 5vw, 3.2rem);
+            font-weight: bold;
+            margin-bottom: 18px;
+            color: #fff;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.18);
+        }
+        .banner-desc {
+            font-size: clamp(1rem, 2.5vw, 1.35rem);
+            margin-bottom: 32px;
+            color: #f8fafc;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.10);
+        }
+        .banner-btn {
+            padding: 16px 40px;
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            border: none;
+            border-radius: 4px;
+            background: #0074D9;
+            color: #fff;
+            cursor: pointer;
+            transition: background 0.2s;
+            box-shadow: 0 2px 8px rgba(0,116,217,0.15);
+            font-weight: bold;
+        }
+        .banner-btn:hover {
+            background: #00c3ff;
+        }
+        /* New styles for events section */
+        #events {
+            padding: 30px 20px 60px 20px;
+            text-align: center;
+        }
+        #events h3 {
+            font-size: 2.3rem;
+            color: #0074D9;
+            margin-bottom: 48px;
+            letter-spacing: 1px;
+        }
+        .events-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 32px;
+            margin: 48px auto 0 auto;
+            max-width: 1500px;
+            padding: 0 10px;
+        }
+        .event-card {
+            flex: 1 1 320px;
+            max-width: 100%;
+            min-width: 340px;
+            background: #fff;
+            border-radius: 10px;
+            border: 2px solid #e0e7ff;
+            box-shadow: 0 4px 24px rgba(0,116,217,0.10);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: box-shadow 0.2s, transform 0.2s, border-color 0.2s;
+            min-height: 520px;
+        }
+        .event-card:focus, .event-card:hover {
+            box-shadow: 0 8px 32px rgba(0,116,217,0.18);
+            border-color: #00c3ff;
+            transform: translateY(-8px) scale(1.03);
+        }
+        .event-image {
+            width: 100%;
+            height: clamp(220px, 30vw, 340px);
+            object-fit: cover;
+        }
+        .event-content {
+            padding: 24px 20px 20px 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .event-title {
+            font-size: clamp(1.1rem, 2vw, 1.6rem);
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #0074D9;
+        }
+        .event-description {
+            font-size: clamp(0.95rem, 1.5vw, 1.15rem);
+            color: #444;
+            margin-bottom: 18px;
+        }
+        .event-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+        }
+        .event-date {
+            font-size: 0.98rem;
+            color: #00c3ff;
+            font-weight: 500;
+        }
+        .event-button {
+            background: #0074D9;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            padding: 0.7em 2em;
+            font-size: clamp(1rem, 1.5vw, 1.1rem);
+            cursor: pointer;
+            transition: background 0.2s;
+            font-weight: bold;
+            box-shadow: 0 2px 8px rgba(0,116,217,0.10);
+        }
+        .event-button:hover {
+            background: #00c3ff;
+        }
+        .footer {
+            text-align: center;
+            padding: 24px 0 16px 0;
+            color: #0074D9;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            background: #f8fafc;
+            margin-top: auto;
+        }
+        html {
+            box-sizing: border-box;
+        }
+        *, *:before, *:after {
+            box-sizing: inherit;
+        }
+        @media (max-width: 700px) {
+            .navbar {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 0 10px;
+            }
+            .navbar-img {
+                height: 40px;
+                margin-bottom: 4px;
+            }
+            .navbar a, .dropbtn {
+                font-size: 1.05rem;
+                padding: 12px 12px;
+            }
+            .banner {
+                padding: 80px 5vw 60px 5vw;
+            }
+            #events {
+                padding: 20px 5vw 40px 5vw;
+            }
+            .footer {
+                padding: 18px 0 10px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <img src="../Project Code/image/logo.png" alt="Logo" class="navbar-img">
+        <div class="navbar-right">
+            <a href="Home_page.html">Home</a>
+            <a href="#login">Account</a>
+            <div class="dropdown">
+                <button class="dropbtn">Menu &#9662;</button>
+                <div class="dropdown-content">
+                    <a href="#">Manage Booking</a>
+                    <a href="Events.html">Events</a>
+                    <a href="Contact_us.html">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="banner">
+        <div class="banner-overlay"></div>
+        <div class="banner-content">
+            <div class="banner-title">Book Your Next Event Effortlessly</div>
+            <div class="banner-desc">Discover and book amazing events near you with just a few clicks.</div>
+            <button class="banner-btn">Browse Events</button>
+        </div>
+    </div>
+    <section aria-label="Upcoming events" id="events">
+        <h3>Upcoming Events</h3>
+        <div class="events-grid">
+            <article aria-describedby="event1-desc event1-date" aria-labelledby="event1-title" class="event-card" tabindex="0">
+                <img alt="Professional adults in a classroom setting, engaging in a digital marketing workshop" class="event-image" height="400" src="https://images.unsplash.com/photo-1513258496099-48168024aec0?auto=format&fit=crop&w=600&q=80" width="600"/>
+                <div class="event-content">
+                    <h4 class="event-title" id="event1-title">Digital Marketing Bootcamp</h4>
+                    <p class="event-description" id="event1-desc">Master the essentials of digital marketing and boost your career prospects in just one weekend.</p>
+                    <div class="event-footer">
+                        <time class="event-date" datetime="2026-07-20" id="event1-date">July 20, 2026</time>
+                        <button aria-label="Book Digital Marketing Bootcamp event" class="event-button" type="button">Book Now</button>
+                    </div>
+                </div>
+            </article>
+            <article aria-describedby="event2-desc event2-date" aria-labelledby="event2-title" class="event-card" tabindex="0">
+                <img alt="Public speaking workshop" class="event-image" height="400" src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=600&q=80" width="600"/>
+                <div class="event-content">
+                    <h4 class="event-title" id="event2-title">Python Programming for Beginners</h4>
+                    <p class="event-description" id="event2-desc">Kickstart your programming journey with hands-on Python lessons tailored for working professionals.</p>
+                    <div class="event-footer">
+                        <time class="event-date" datetime="2026-08-05" id="event2-date">August 5, 2026</time>
+                        <button aria-label="Book Python Programming for Beginners event" class="event-button" type="button">Book Now</button>
+                    </div>
+                </div>
+            </article>
+            <article aria-describedby="event3-desc event3-date" aria-labelledby="event3-title" class="event-card" tabindex="0">
+                <img alt="Adults collaborating on laptops during a coding workshop" class="event-image" height="400" src="https://images.unsplash.com/photo-1503676382389-4809596d5290?auto=format&fit=crop&w=600&q=80" width="600"/>
+                <div class="event-content">
+                    <h4 class="event-title" id="event3-title">Leadership & Communication Skills</h4>
+                    <p class="event-description" id="event3-desc">Enhance your leadership and communication skills to excel in your workplace and beyond.</p>
+                    <div class="event-footer">
+                        <time class="event-date" datetime="2026-09-12" id="event3-date">September 12, 2026</time>
+                        <button aria-label="Book Leadership & Communication Skills event" class="event-button" type="button">Book Now</button>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+    <footer class="footer">
+        &copy; 2024 Event Booking. All rights reserved.
+    </footer>
+    <script>
+        // Simulate login state (replace with real authentication logic)
+        // Set to true if user is logged in, false if not
+        var isLoggedIn = false; // Change to true for logged-in state
+
+        function updateNavbar() {
+            const navbarRight = document.querySelector('.navbar-right');
+            if (!navbarRight) return;
+            let html = '';
+            html += '<a href="Home_page.html">Home</a>';
+            if (isLoggedIn) {
+                html += '<a href="#login">Account</a>';
+                html += `<div class="dropdown">
+                    <button class="dropbtn">Menu &#9662;</button>
+                    <div class="dropdown-content">
+                        <a href=\"Manage_bookings.html\">Manage Booking</a>
+                        <a href=\"Events.html\">Events</a>
+                        <a href=\"Contact_us.html\">Contact Us</a>
+                    </div>
+                </div>`;
+            } else {
+                html += '<a href="#login">Log In</a>';
+                html += `<div class="dropdown">
+                    <button class="dropbtn">Menu &#9662;</button>
+                    <div class="dropdown-content">
+                        <a href=\"Sign_Up.html\">Sign Up</a>
+                        <a href=\"Events.html\">Events</a>
+                        <a href=\"Contact_us.html\">Contact Us</a>
+                    </div>
+                </div>`;
+            }
+            navbarRight.innerHTML = html;
+        }
+        document.addEventListener('DOMContentLoaded', updateNavbar);
+    </script>
+</body>
+</html>

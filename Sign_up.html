@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <style>
+/* Sign_up.css - Styles for Sign Up Page */
+html, body { height: 100%; }
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: linear-gradient(120deg, #f0faff 0%, #e0f7fa 100%);
+}
+.navbar {
+    background: #0074D9;
+    display: flex;
+    align-items: center;
+    padding: 0 24px;
+    justify-content: space-between;
+    box-shadow: 0 2px 12px rgba(0,116,217,0.08);
+    height: 65px;
+    min-height: 65px;
+}
+.navbar-img {
+    height: 52px;
+    margin-left: 0;
+    margin-right: 18px;
+    transition: height 0.2s;
+}
+.navbar-right {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+}
+.navbar a, .dropbtn {
+    font-size: 1.25rem;
+    color: white;
+    text-align: center;
+    padding: 16px 22px;
+    text-decoration: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-weight: 700;
+    letter-spacing: 0.7px;
+    transition: font-size 0.2s, padding 0.2s;
+}
+.navbar a:hover, .dropdown:hover .dropbtn {
+    background: #00c3ff;
+    color: #fff;
+}
+.dropdown { position: relative; }
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    left: 0;
+}
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+.dropdown-content a:hover { background-color: #ddd; }
+.dropdown:hover .dropdown-content { display: block; }
+.signup-container {
+    display: flex;
+    flex: 1;
+    max-width: 1100px;
+    margin: 48px auto 0 auto;
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 8px 32px rgba(0,116,217,0.13);
+    overflow: hidden;
+    min-height: 540px;
+}
+.signup-form-section {
+    flex: 1.1;
+    padding: 48px 40px 32px 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.signup-title {
+    font-size: 2.1rem;
+    font-weight: bold;
+    margin-bottom: 32px;
+    color: #0074D9;
+}
+.signup-form label {
+    font-size: 1.08rem;
+    font-weight: 500;
+    margin-bottom: 6px;
+    color: #222;
+}
+.signup-form input[type="text"],
+.signup-form input[type="email"],
+.signup-form input[type="password"] {
+    width: 100%;
+    padding: 10px 12px;
+    margin-bottom: 18px;
+    border: 1.5px solid #b3e0fc;
+    border-radius: 6px;
+    font-size: 1.08rem;
+    background: #f8fafc;
+    transition: border 0.2s;
+}
+.signup-form input[type="text"]:focus,
+.signup-form input[type="email"]:focus,
+.signup-form input[type="password"]:focus {
+    border: 1.5px solid #0074D9;
+    outline: none;
+}
+.phone-row {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    margin-bottom: 18px;
+}
+.checkbox-row {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 16px;
+}
+.checkbox-row input[type="checkbox"] {
+    margin-right: 12px;
+    margin-top: 2px;
+    width: 20px;
+    height: 20px;
+}
+.checkbox-row label {
+    font-size: 1rem;
+    color: #222;
+    font-weight: 400;
+    cursor: pointer;
+}
+.signup-btn {
+    background: linear-gradient(90deg, #0074D9 60%, #00c3ff 100%);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 1em 2.5em;
+    font-size: 1.13rem;
+    cursor: pointer;
+    font-weight: bold;
+    box-shadow: 0 2px 12px rgba(0,116,217,0.13);
+    margin-top: 18px;
+    transition: background 0.2s, transform 0.2s;
+}
+.signup-btn:hover {
+    background: linear-gradient(90deg, #00c3ff 60%, #0074D9 100%);
+    transform: scale(1.07);
+}
+.signup-image-section {
+    flex: 1;
+    background: #e0f7fa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 320px;
+    min-height: 420px;
+}
+.signup-image-placeholder {
+    width: 90%;
+    height: 90%;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    object-fit: cover;
+    border: 2px solid #b3e0fc;
+}
+.footer {
+    text-align: center;
+    padding: 24px 0 16px 0;
+    color: #0074D9;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    background: #f8fafc;
+    margin-top: auto;
+}
+@media (max-width: 900px) {
+    .signup-container {
+        flex-direction: column;
+        min-height: 0;
+    }
+    .signup-image-section {
+        min-height: 180px;
+        height: 180px;
+    }
+}
+@media (max-width: 700px) {
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0 10px;
+    }
+    .navbar-img {
+        height: 40px;
+        margin-bottom: 4px;
+    }
+    .navbar a, .dropbtn {
+        font-size: 1.05rem;
+        padding: 12px 12px;
+    }
+    .signup-container {
+        margin: 18px 0 0 0;
+        border-radius: 0;
+        box-shadow: none;
+    }
+    .signup-form-section {
+        padding: 24px 10px 18px 10px;
+    }
+    .signup-title {
+        font-size: 1.3rem;
+        margin-bottom: 18px;
+    }
+    .footer {
+        padding: 18px 0 10px 0;
+    }
+}
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <img src="../Project Code/image/logo.png" alt="Logo" class="navbar-img">
+        <div class="navbar-right">
+            <a href="Home_page.html">Home</a>
+            <a href="#login">Account</a>
+            <div class="dropdown">
+                <button class="dropbtn">Menu &#9662;</button>
+                <div class="dropdown-content">
+                    <a href="Manage_bookings.html">Manage Booking</a>
+                    <a href="Events.html">Events</a>
+                    <a href="Contact_us.html">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="signup-container">
+        <div class="signup-form-section">
+            <div class="signup-title">Sign Up Now</div>
+            <form class="signup-form">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" required>
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+                <label for="phone">Phone Number</label>
+                <div class="phone-row">
+                    <input type="text" id="country-code" name="country-code" placeholder="Country Code (e.g. +65)" required style="width:90px;">
+                    <input type="text" id="phone" name="phone" required style="flex:1;" placeholder="Phone Number">
+                </div>
+                <div class="checkbox-row">
+                    <input type="checkbox" id="privacy" name="privacy" required>
+                    <label for="privacy">I agree to the Privacy Policy, Terms of Use and Terms of Service</label>
+                </div>
+                <div class="checkbox-row">
+                    <input type="checkbox" id="marketing" name="marketing">
+                    <label for="marketing">I agree to receive marketing notifications with offers and news</label>
+                </div>
+                <button class="signup-btn" type="submit">Sign Up</button>
+            </form>
+        </div>
+        <div class="signup-image-section">
+            <img src="https://images.unsplash.com/photo-1515168833906-d2a3b82b3029?auto=format&fit=crop&w=600&q=80" alt="Sign Up" class="signup-image-placeholder">
+        </div>
+    </div>
+    <footer class="footer">
+        &copy; 2024 Event Booking. All rights reserved.
+    </footer>
+</body>
+</html>
